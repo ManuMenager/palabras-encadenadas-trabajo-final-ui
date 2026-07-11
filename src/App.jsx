@@ -12,7 +12,6 @@ function App() {
         </Routes>
       </BrowserRouter>
       
-      {/* Contenedor global de notificaciones */}
       <ToastContainer
         position="top-right"
         autoClose={4000}
