@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { GameBoard } from "../components/Game/GameBoard";
+import { GameBoard } from "../components/game/GameBoard";
 import { getLeaderboard } from "../services/leaderboardService";
 import { Container, Row, Col, Card, Table } from "react-bootstrap"; 
+
+import "./Home.css";
 
 export const Home = () => {
   const [leaderboard, setLeaderboard] = useState([]);
 
-  // Cargar el leaderboard al montar el componente
   const refreshLeaderboard = () => {
     setLeaderboard(getLeaderboard());
   };
@@ -16,45 +17,44 @@ export const Home = () => {
   }, []);
 
   return (
-    <Container className="py-5">
-      <h1 className="text-center mb-5 fw-bold text-primary">Palabras Encadenadas</h1>
+    <Container className="home-container">
+      <h1 className="text-center fw-bold home-title">Palabras Encadenadas</h1>
       
-      <Row className="justify-content-center g-4">
-        {/* Columna del Juego */}
-        <Col xs={12} lg={8}>
-          {/* Pasamos refreshLeaderboard para que el tablero avise cuando hay un nuevo puntaje */}
+      <Row className="justify-content-center align-items-center g-4 home-row">
+        <Col xs={12} lg={7} xl={6} className="home-col">
           <GameBoard onGameOver={refreshLeaderboard} />
         </Col>
 
-        {/* Columna del Leaderboard */}
-        <Col xs={12} lg={4}>
-          <Card className="shadow-sm border-0 h-100">
-            <Card.Body>
-              <Card.Title className="text-center fw-bold mb-4">
-                Top 10 Puntajes
+        <Col xs={12} lg={5} xl={4} className="home-col">
+          <Card className="leaderboard-card border-0 rounded-4">
+            <Card.Body className="leaderboard-card-body">
+              <Card.Title className="text-center fw-bold mb-3 leaderboard-title">
+                🏆 Top 10 Puntajes
               </Card.Title>
               
               {leaderboard.length === 0 ? (
-                <p className="text-center text-muted">Aún no hay puntajes registrados.</p>
+                <p className="text-center text-muted mt-3">Aún no hay puntajes registrados.</p>
               ) : (
-                <Table borderless hover responsive size="sm">
-                  <thead>
-                    <tr className="border-bottom">
-                      <th>#</th>
-                      <th>Puntaje</th>
-                      <th>Palabras</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {leaderboard.map((entry, index) => (
-                      <tr key={entry.id}>
-                        <td className="fw-bold text-muted">{index + 1}</td>
-                        <td className="fw-bold text-success">{entry.score} pts</td>
-                        <td>{entry.wordsCount}</td>
+                <div className="leaderboard-scroll">
+                  <Table borderless hover responsive size="sm" className="bg-transparent">
+                    <thead>
+                      <tr className="border-bottom border-secondary border-opacity-25">
+                        <th className="bg-transparent">#</th>
+                        <th className="bg-transparent">Puntaje</th>
+                        <th className="bg-transparent">Palabras</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </Table>
+                    </thead>
+                    <tbody>
+                      {leaderboard.map((entry, index) => (
+                        <tr key={entry.id}>
+                          <td className="fw-bold text-muted bg-transparent">{index + 1}</td>
+                          <td className="fw-bold text-success bg-transparent">{entry.score} pts</td>
+                          <td className="bg-transparent">{entry.wordsCount}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </div>
               )}
             </Card.Body>
           </Card>
