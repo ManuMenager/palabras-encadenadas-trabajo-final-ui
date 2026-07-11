@@ -56,14 +56,12 @@ export const GameBoard = () => {
     
     if (!word || isGameOver || isValidating) return;
 
-    // 1. Validaciones locales (usando utils/validators.js)
     const localValidationError = validateLocalGameRules(word, words);
     if (localValidationError) {
       notify.error(localValidationError);
       return;
     }
 
-    // 2. Validación con la API externa
     setIsValidating(true);
     try {
       const exists = await validateWord(word);
@@ -72,14 +70,12 @@ export const GameBoard = () => {
         return;
       }
 
-      // 3. Éxito: Actualizar estados
       setWords((prev) => [...prev, word]);
       setScore((prev) => prev + word.length);
       setTimeLeft(TURN_DURATION);
       setCurrentInput("");
       
     } catch (err) {
-      // Captura el error 400 u otros problemas manejados en el servicio
       notify.error(err.message);
     } finally {
       setIsValidating(false);
@@ -107,7 +103,6 @@ export const GameBoard = () => {
         </div>
       </header>
 
-      {/* Cadena de palabras jugadas */}
       <div className="word-chain-box">
         {words.length === 0 ? (
           <p className="placeholder-text">Ingresa tu primera palabra para comenzar a jugar.</p>
