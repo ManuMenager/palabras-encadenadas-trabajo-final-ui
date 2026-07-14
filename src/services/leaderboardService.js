@@ -5,7 +5,7 @@ export const getLeaderboard = () => {
   return data ? JSON.parse(data) : [];
 };
 
-export const saveScore = (score, wordsCount) => {
+export const saveScore = (score, wordsCount, playerName) => {
   if (score === 0) return;
 
   const currentLeaderboard = getLeaderboard();
@@ -13,6 +13,7 @@ export const saveScore = (score, wordsCount) => {
     id: Date.now(),
     score,
     wordsCount,
+    playerName: playerName || "Anónimo",
     date: new Date().toLocaleDateString(),
   };
 
