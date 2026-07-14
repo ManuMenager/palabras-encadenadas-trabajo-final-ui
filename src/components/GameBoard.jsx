@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { validateWord } from "../../services/wordService";
-import { validateLocalGameRules } from "../../utils/validators";
-import { GAME_ERRORS, notify } from "../../utils/errorMessages";
-import { saveScore } from "../../services/leaderboardService";
+import { validateWord } from "../services/wordService";
+import { validateLocalGameRules } from "../utils/validators";
+import { GAME_ERRORS, notify } from "../utils/errorMessages";
+import { saveScore } from "../services/leaderboardService";
 import "./GameBoard.css";
 
 const TURN_DURATION = 15;
 
-export const GameBoard = () => {
+export const GameBoard = ({ playerName, onGameOver }) => {
   const [words, setWords] = useState([]);
   const [currentInput, setCurrentInput] = useState("");
   const [timeLeft, setTimeLeft] = useState(TURN_DURATION);
@@ -39,10 +39,12 @@ export const GameBoard = () => {
   }, [timeLeft, isGameOver]);
 
   useEffect(() => {
-    if (isGameOver) {
-      saveScore(score, words.length);
+    if (timeLeft === 0 && !isGameOver) {
+      setIsGameOver(true);
+      saveScore(score, words.length, playerName);
+      if (onGameOver) onGameOver();
     }
-  }, [isGameOver]);
+  }, [timeLeft, isGameOver, score, words.length, playerName, onGameOver]);
 
   useEffect(() => {
     if (inputRef.current && !isGameOver) {
@@ -89,7 +91,7 @@ export const GameBoard = () => {
     setScore(0);
     setIsGameOver(false);
   };
-  
+  console.log("Estado actual - isGameOver:", isGameOver);
   return (
     <div className="game-container">
       <header className="game-header">

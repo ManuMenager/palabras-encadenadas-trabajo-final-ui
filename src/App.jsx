@@ -1,14 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Home } from "./pages/Home";
+import { Welcome } from "./pages/Welcome";
+import { Game } from "./pages/Game";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Welcome />} />
+          <Route path="/game" element={<Game />} />
         </Routes>
       </BrowserRouter>
       
