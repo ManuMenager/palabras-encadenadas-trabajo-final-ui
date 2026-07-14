@@ -1,0 +1,96 @@
+.leaderboard-card {
+  width: 100%;
+  background: linear-gradient(160deg, rgba(38, 30, 24, 0.9) 0%, rgba(20, 15, 11, 0.85) 100%) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(184, 134, 90, 0.25) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  color: #f8fafc;
+  overflow: hidden;
+}
+
+.leaderboard-card-body {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.5rem, 3svh, 2rem);
+}
+
+.leaderboard-title {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  color: #fbbf24;
+  text-shadow: 0 0 18px rgba(251, 191, 36, 0.3);
+}
+
+.leaderboard-scroll {
+  overflow-y: auto;
+  max-height: 40svh;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(251, 191, 36, 0.4) rgba(20, 15, 11, 0.4);
+}
+
+.leaderboard-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-track {
+  background: rgba(20, 15, 11, 0.4);
+  border-radius: 8px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-thumb {
+  background: rgba(251, 191, 36, 0.4);
+  border-radius: 8px;
+}
+
+.table {
+  color: #cbd5e1 !important;
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table td, .table th {
+  color: inherit !important;
+  border-color: rgba(148, 163, 184, 0.12) !important;
+  vertical-align: middle;
+}
+
+.table thead th {
+  font-family: 'Merriweather', serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #94a3b8 !important;
+  background-color: rgba(20, 15, 11, 0.4);
+  border-bottom: 2px solid rgba(251, 191, 36, 0.25) !important;
+}
+
+.table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+  background-color: rgba(184, 134, 90, 0.08) !important;
+}
+
+.table tbody tr:nth-child(1) td:first-child {
+  color: #fbbf24 !important;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+}
+
+.table tbody tr:nth-child(2) td:first-child {
+  color: #d1d5db !important;
+  font-weight: 700;
+}
+
+.table tbody tr:nth-child(3) td:first-child {
+  color: #d97706 !important;
+  font-weight: 700;
+}
+
+.table tbody tr:nth-child(n+4):nth-child(-n+10) td:first-child {
+  color: #747a83 !important;
+}
